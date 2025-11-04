@@ -34,38 +34,38 @@ export default function HomePage({ onSelectRole }: HomePageProps) {
         <div className="space-y-4 animate-fade-in-up max-w-5xl mx-auto">
           {/* Admin Card */}
           <Card className="border-2 border-blue-200 bg-white/95 backdrop-blur-sm cursor-pointer transition-shadow duration-200 hover:shadow-md">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-6">
+            <CardContent className="p-4 md:p-6">
+              <div className="flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-6">
                 {/* Icon */}
                 <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
                   <Shield className="w-8 h-8 text-white" />
                 </div>
                 
                 {/* Content */}
-                <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-0 text-center md:text-left">
                   <div className="mb-3">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-1">Administrator</h3>
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-1">Administrator</h3>
                     <p className="text-sm text-gray-600">Akses penuh ke seluruh sistem</p>
                   </div>
                   
-                  <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-700">
-                    <div className="flex items-center gap-2">
+                  <div className="flex flex-col md:flex-row md:flex-wrap gap-2 md:gap-x-6 md:gap-y-2 text-sm text-gray-700">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
                       <span className="text-green-500 font-bold">✓</span>
                       <span>Kelola semua klien & proyek</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
                       <span className="text-green-500 font-bold">✓</span>
                       <span>Kelola akun pegawai</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
                       <span className="text-green-500 font-bold">✓</span>
                       <span>Kelola data master</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
                       <span className="text-green-500 font-bold">✓</span>
                       <span>Generate link akses klien</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
                       <span className="text-green-500 font-bold">✓</span>
                       <span>Lihat log aktivitas lengkap</span>
                     </div>
@@ -75,7 +75,7 @@ export default function HomePage({ onSelectRole }: HomePageProps) {
                 {/* Button */}
                 <Button 
                   onClick={() => onSelectRole('admin')}
-                  className="h-11 px-6 flex-shrink-0"
+                  className="h-11 px-4 md:px-6 flex-shrink-0 w-full md:w-auto"
                 >
                   <Shield className="w-4 h-4 mr-2" />
                   Masuk sebagai Admin
@@ -86,38 +86,38 @@ export default function HomePage({ onSelectRole }: HomePageProps) {
 
           {/* Employee Card */}
           <Card className="border-2 border-green-200 bg-white/95 backdrop-blur-sm cursor-pointer transition-shadow duration-200 hover:shadow-md">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-6">
+            <CardContent className="p-4 md:p-6">
+              <div className="flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-6">
                 {/* Icon */}
                 <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
                   <UserCircle className="w-8 h-8 text-white" />
                 </div>
                 
                 {/* Content */}
-                <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-0 text-center md:text-left">
                   <div className="mb-3">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-1">Pegawai</h3>
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-1">Pegawai</h3>
                     <p className="text-sm text-gray-600">Kelola proyek yang ditugaskan</p>
                   </div>
                   
-                  <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-700">
-                    <div className="flex items-center gap-2">
+                  <div className="flex flex-col md:flex-row md:flex-wrap gap-2 md:gap-x-6 md:gap-y-2 text-sm text-gray-700">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
                       <span className="text-green-500 font-bold">✓</span>
                       <span>Kelola klien (tambah/edit)</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
                       <span className="text-green-500 font-bold">✓</span>
                       <span>Kelola proyek yang tertaut</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
                       <span className="text-green-500 font-bold">✓</span>
                       <span>Upload & arsipkan dokumen</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
                       <span className="text-green-500 font-bold">✓</span>
                       <span>Lihat log aktivitas</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
                       <span className="text-red-500 font-bold">✗</span>
                       <span>Tidak bisa delete proyek/klien</span>
                     </div>
@@ -127,7 +127,7 @@ export default function HomePage({ onSelectRole }: HomePageProps) {
                 {/* Button */}
                 <Button 
                   onClick={() => onSelectRole('employee')}
-                  className="h-11 px-6 flex-shrink-0"
+                  className="h-11 px-4 md:px-6 flex-shrink-0 w-full md:w-auto"
                 >
                   <UserCircle className="w-4 h-4 mr-2" />
                   Masuk sebagai Pegawai
@@ -138,38 +138,38 @@ export default function HomePage({ onSelectRole }: HomePageProps) {
 
           {/* Client Card */}
           <Card className="border-2 border-purple-200 bg-white/95 backdrop-blur-sm cursor-pointer transition-shadow duration-200 hover:shadow-md">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-6">
+            <CardContent className="p-4 md:p-6">
+              <div className="flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-6">
                 {/* Icon */}
                 <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
                   <Building2 className="w-8 h-8 text-white" />
                 </div>
                 
                 {/* Content */}
-                <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-0 text-center md:text-left">
                   <div className="mb-3">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-1">Klien</h3>
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-1">Klien</h3>
                     <p className="text-sm text-gray-600">Akses dokumen proyek Anda</p>
                   </div>
                   
-                  <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-700">
-                    <div className="flex items-center gap-2">
+                  <div className="flex flex-col md:flex-row md:flex-wrap gap-2 md:gap-x-6 md:gap-y-2 text-sm text-gray-700">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
                       <span className="text-green-500 font-bold">✓</span>
                       <span>Lihat dokumen proyek</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
                       <span className="text-green-500 font-bold">✓</span>
                       <span>Download dokumen</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
                       <span className="text-green-500 font-bold">✓</span>
                       <span>Preview file (PDF, CSV, dll)</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
                       <span className="text-blue-500 font-bold">ⓘ</span>
                       <span className="font-medium text-blue-600">Akses via link khusus</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
                       <span className="text-orange-500 font-bold">⏰</span>
                       <span className="text-orange-600">Link berlaku 1 jam</span>
                     </div>
@@ -179,7 +179,7 @@ export default function HomePage({ onSelectRole }: HomePageProps) {
                 {/* Button */}
                 <Button 
                   onClick={() => onSelectRole('client')}
-                  className="h-11 px-6 flex-shrink-0"
+                  className="h-11 px-4 md:px-6 flex-shrink-0 w-full md:w-auto"
                 >
                   <Building2 className="w-4 h-4 mr-2" />
                   Akses Portal Klien

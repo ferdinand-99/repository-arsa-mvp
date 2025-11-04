@@ -3,6 +3,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Badge } from './ui/badge';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from './ui/dialog';
 import { 
   FileText, 
   Download, 
@@ -16,7 +23,8 @@ import {
   Eye,
   File,
   LayoutGrid,
-  List
+  List,
+  X
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -42,8 +50,10 @@ export default function ClientPortal({ token }: ClientPortalProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedProject, setSelectedProject] = useState<string>('all');
   const [selectedType, setSelectedType] = useState<string>('all');
-  const [viewMode, setViewMode] = useState<'long' | 'compact'>('long');
+  const [viewMode, setViewMode] = useState<'long' | 'compact'>('compact');
   const [companyName] = useState('PT. Maju Bersama');
+  const [previewDocument, setPreviewDocument] = useState<Document | null>(null);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   
   const [documents] = useState<Document[]>([
     {
@@ -144,8 +154,8 @@ export default function ClientPortal({ token }: ClientPortalProps) {
   };
 
   const handlePreview = (doc: Document) => {
-    toast.info(`Membuka preview ${doc.name}...`);
-    // Implementasi preview
+    setPreviewDocument(doc);
+    setIsPreviewOpen(true);
   };
 
   // Link expired
@@ -489,6 +499,150 @@ export default function ClientPortal({ token }: ClientPortalProps) {
           </div>
         </div>
       </div>
+
+      {/* Preview Modal */}
+      <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
+        <DialogContent className="max-w-4xl h-[80vh]">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              {previewDocument?.type === 'PDF' ? (
+                <FileText className="w-5 h-5 text-red-600" />
+              ) : (
+                <File className="w-5 h-5 text-green-600" />
+              )}
+              {previewDocument?.name}
+            </DialogTitle>
+            <DialogDescription>
+              <div className="flex flex-wrap items-center gap-3 text-sm mt-2">
+                <Badge variant="outline">{previewDocument?.category}</Badge>
+                <span className="flex items-center gap-1">
+                  <FolderOpen className="w-3 h-3" />
+                  {previewDocument?.projectName}
+                </span>
+                <span className="flex items-center gap-1">
+                  <Calendar className="w-3 h-3" />
+                  {previewDocument && new Date(previewDocument.uploadDate).toLocaleDateString('id-ID')}
+                </span>
+                <span>{previewDocument?.size}</span>
+              </div>
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="flex-1 overflow-auto border rounded-lg bg-gray-50 p-6">
+            {previewDocument?.type === 'PDF' ? (
+              <div className="flex flex-col items-center justify-center h-full text-gray-500">
+                <FileText className="w-16 h-16 mb-4" />
+                <p className="text-lg font-medium mb-2">Preview PDF</p>
+                <p className="text-sm text-center mb-4">
+                  Simulasi preview untuk dokumen:<br />
+                  <span className="font-medium">{previewDocument.name}</span>
+                </p>
+                <div className="bg-white p-8 rounded-lg shadow-sm border w-full max-w-2xl">
+                  <div className="space-y-4 text-gray-700">
+                    <h3 className="text-xl font-bold text-gray-900">{previewDocument.category}</h3>
+                    <p className="text-sm">Proyek: {previewDocument.projectName}</p>
+                    <div className="border-t pt-4 space-y-2">
+                      <p>Ini adalah simulasi konten dokumen PDF.</p>
+                      <p>Dalam implementasi sebenarnya, Anda dapat menggunakan:</p>
+                      <ul className="list-disc list-inside ml-4 text-sm">
+                        <li>PDF viewer library (react-pdf, pdfjs-dist)</li>
+                        <li>Iframe dengan PDF URL</li>
+                        <li>Object/embed tag untuk PDF</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : previewDocument?.type === 'CSV' ? (
+              <div className="h-full">
+                <div className="bg-white rounded-lg p-4">
+                  <h3 className="text-lg font-medium mb-4">Preview Data CSV</h3>
+                  <div className="overflow-auto">
+                    <table className="w-full border-collapse">
+                      <thead>
+                        <tr className="bg-gray-100">
+                          <th className="border px-4 py-2 text-left">ID</th>
+                          <th className="border px-4 py-2 text-left">Nama Item</th>
+                          <th className="border px-4 py-2 text-left">Kategori</th>
+                          <th className="border px-4 py-2 text-left">Jumlah</th>
+                          <th className="border px-4 py-2 text-left">Harga</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="border px-4 py-2">001</td>
+                          <td className="border px-4 py-2">Laptop Dell XPS 15</td>
+                          <td className="border px-4 py-2">Elektronik</td>
+                          <td className="border px-4 py-2">5</td>
+                          <td className="border px-4 py-2">Rp 25.000.000</td>
+                        </tr>
+                        <tr className="bg-gray-50">
+                          <td className="border px-4 py-2">002</td>
+                          <td className="border px-4 py-2">Meja Kerja</td>
+                          <td className="border px-4 py-2">Furniture</td>
+                          <td className="border px-4 py-2">10</td>
+                          <td className="border px-4 py-2">Rp 3.500.000</td>
+                        </tr>
+                        <tr>
+                          <td className="border px-4 py-2">003</td>
+                          <td className="border px-4 py-2">Kursi Ergonomis</td>
+                          <td className="border px-4 py-2">Furniture</td>
+                          <td className="border px-4 py-2">10</td>
+                          <td className="border px-4 py-2">Rp 2.000.000</td>
+                        </tr>
+                        <tr className="bg-gray-50">
+                          <td className="border px-4 py-2">004</td>
+                          <td className="border px-4 py-2">Printer Canon</td>
+                          <td className="border px-4 py-2">Elektronik</td>
+                          <td className="border px-4 py-2">3</td>
+                          <td className="border px-4 py-2">Rp 4.500.000</td>
+                        </tr>
+                        <tr>
+                          <td className="border px-4 py-2">005</td>
+                          <td className="border px-4 py-2">AC 2 PK</td>
+                          <td className="border px-4 py-2">Elektronik</td>
+                          <td className="border px-4 py-2">8</td>
+                          <td className="border px-4 py-2">Rp 40.000.000</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="text-sm text-gray-500 mt-4">
+                    * Ini adalah simulasi data. Dalam implementasi sebenarnya, data akan dimuat dari file CSV yang sebenarnya.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center h-full text-gray-500">
+                <div className="text-center">
+                  <File className="w-16 h-16 mx-auto mb-4" />
+                  <p className="text-lg font-medium">Format file tidak didukung untuk preview</p>
+                  <p className="text-sm mt-2">Silakan download file untuk melihat isinya</p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="flex justify-end gap-2 pt-4">
+            <Button
+              variant="outline"
+              onClick={() => setIsPreviewOpen(false)}
+            >
+              Tutup
+            </Button>
+            <Button
+              onClick={() => {
+                if (previewDocument) {
+                  handleDownload(previewDocument);
+                }
+              }}
+            >
+              <Download className="w-4 h-4 mr-2" />
+              Download
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
